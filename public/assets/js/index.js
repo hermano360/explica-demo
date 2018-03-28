@@ -1,10 +1,19 @@
 
 $( document ).ready(function() {
 
-  $('.music-service-button.youtube').css('display', 'inline-block')
-  $('.music-service-button.youtube').addClass('active')
-  $('.music-player-container.youtube').css('display', 'block')
-  $('.music-player-container.youtube iframe').attr('src', "https://www.youtube.com/embed/videoseries?list=PLVtit4eDhYIKqEEA91JPfu2VYKKnmw7y9")
+
+
+  $.ajax({
+         url: "https://www.googleapis.com/youtube/v3/search?part=snippet&q=2014+Forrest+Hills+Drive&key=AIzaSyAphZf2PFTn8QR0C02-QbduW0sbswG07y8&type=playlist&maxResults=1",
+         type: "GET",
+         success: function(response) {
+           $('.music-service-button.youtube').css('display', 'inline-block')
+           $('.music-service-button.youtube').addClass('active')
+           $('.music-player-container.youtube').css('display', 'block')
+           $('.music-player-container.youtube iframe').attr('src', "https://www.youtube.com/embed/videoseries?list="+response.items[0].id.playlistId)
+         }})
+
+
 
   $.ajax({
          url: "/token",
@@ -118,6 +127,15 @@ $( document ).ready(function() {
           interval: 5000
         })
       })
+
+      $('iframe').attr('height', ($('.body').width()*.75).toString())
+
+
+      $( window ).resize(function() {
+        $('iframe').attr('height', ($('.body').width()*.75).toString())
+      });
+
+
 
 });
 
