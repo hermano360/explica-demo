@@ -10,6 +10,9 @@
     bottom: 0;
     z-index: 1;
 }
+
+
+
 body {
   background: rgba(22,27,31,1);
 }
@@ -26,9 +29,6 @@ body {
   padding-left: 10%;
 }
 
-.side-padding.spotify {
-  padding-left: 8%;
-}
 
 .album-information {
   z-index: 2;
@@ -68,21 +68,16 @@ body {
   margin-bottom: -1px;
 }
 
-.music-service-button:last-child {
-  width: 11%;
-  padding-right: 0px;
-}
-
 
 .music-service-button {
   font-size: 75px;
   color: rgb(71,78,86);
   width: 16%;
-  display: inline-block;
+
   padding: 0;
   padding-bottom:3%;
   margin-right: 4%;
-
+  display: none;
 }
 
 .music-service-button.active {
@@ -93,7 +88,10 @@ body {
 .music-player-container {
   min-height: 100px;
   padding-top: 5px;
+  padding-left: 13%;
+  display: none;
 }
+
 
 .related-content {
 

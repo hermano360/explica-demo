@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="utf-8">
+
   <title>Explica</title>
   <link href="https://fonts.googleapis.com/css?family=Oswald|Work+Sans" rel="stylesheet">
   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.0.0/css/font-awesome.min.css"> -->
@@ -11,16 +12,18 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous" async></script>
 
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/brands.css" integrity="sha384-IiIL1/ODJBRTrDTFk/pW8j0DUI5/z9m1KYsTm/RjZTNV8RHLGZXkUDwgRRbbQ+Jh" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" integrity="sha384-q3jl8XQu1OpdLgGFvNRnPdj5VIlCvgsDQTQB6owSOHWlAurxul7f+JpUOVdAiJ5P" crossorigin="anonymous">
-  <script src="https://use.fontawesome.com/c974f65ff6.js"></script>
-  <script src="assets/js/index.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" >
+  <script src="https://use.fontawesome.com/c974f65ff6.js" async></script>
+  <script src="assets/js/index.js" async></script>
   <link rel="stylesheet" href="assets/css/index.css">
 </head>
 
 <body>
   <div class="body">
-    <div class="album-art"></div>
+
+      <div class="album-art"></div>
+
+
     <div class="album-information side-padding">
       <div class="album-title"></div>
       <div class="album-subtitle">
@@ -30,7 +33,7 @@
       </div>
     </div>
     <div class="music-service-buttons side-padding app-container">
-      <div class="music-service-button active spotify">
+      <div class="music-service-button spotify">
         <i class="fa fa-spotify"></i>
       </div>
       <div class="music-service-button apple">
@@ -39,17 +42,23 @@
       <div class="music-service-button youtube">
         <i class="fa fa-youtube"></i>
       </div>
-      <div class="music-service-button google">
-        <i class="fab fa-google-play"></i>
-      </div>
-      <div class="music-service-button tidal">
-        <i class="fab fa-google-play"></i>
-      </div>
 
     </div>
-    <div class="music-player-container side-padding app-container spotify">
-      <iframe class="music-player-iframe" style="display: none;" src="" width="760" height="700" frameBorder="0" allowtransparency="false"></iframe>
+    <div class="music-player-container app-container spotify">
+      <iframe class="music-player-iframe spotify"  src="" height="500px" width="75%" frameBorder="0" allowtransparency="false"></iframe>
     </div>
+    <div class="music-player-container  app-container apple">
+      <iframe class="music-player-iframe apple"  src="" height="500px" width="75%" frameborder="0"></iframe>
+    </div>
+
+    <div class="music-player-container app-container youtube">
+      <iframe height="500px" width="75%" src="https://www.youtube.com/embed/videoseries?list=PLVtit4eDhYIKqEEA91JPfu2VYKKnmw7y9" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+    </div>
+
+
+
+
 
 
     <div class="related-content app-container">
@@ -57,8 +66,7 @@
         Related
       </div>
 
-      <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-
+      <div id="carousel-example-generic" class="carousel slide" data-ride="true" >
         <div class="carousel-inner" role="listbox">
           <div class="item active disc-0">
             <a href="" rel="noopener noreferrer" target="_blank" class="album-link">
@@ -186,6 +194,8 @@
               <span class="sr-only">Next</span>
             </a>
       </div>
+
+
     </div>
 
     <div class="related-artist app-container">
