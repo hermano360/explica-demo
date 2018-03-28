@@ -7,13 +7,13 @@ $( document ).ready(function() {
          url: "https://www.googleapis.com/youtube/v3/search?part=snippet&q=2014+Forrest+Hills+Drive&key=AIzaSyAphZf2PFTn8QR0C02-QbduW0sbswG07y8&type=playlist&maxResults=1",
          type: "GET",
          success: function(response) {
-           $('.music-service-button.youtube').css('display', 'inline-block')
+            $('.music-service-button.youtube').css('display', 'inline-block')
+
+           $( ".music-player-container.app-container.youtube" ).append( '<iframe width="100%" src="'+'https://www.youtube.com/embed/videoseries?list=' +response.items[0].id.playlistId+'" frameborder="0" allow="autoplay; encrypted-media" height="'+($('.body').width()*.75).toString()+'"allowfullscreen></iframe>')
+           removeActiveMusicServiceButton()
            $('.music-service-button.youtube').addClass('active')
-           $('.music-player-container.youtube').css('display', 'block')
-           $('.music-player-container.youtube iframe').attr('src', "https://www.youtube.com/embed/videoseries?list="+response.items[0].id.playlistId)
+           $('.music-service-button.youtube').click()
          }})
-
-
 
   $.ajax({
          url: "/token",
@@ -28,11 +28,11 @@ $( document ).ready(function() {
                     $('.album-title').html(response.name)
                     $('.album-artist').html(response.artists[0].name)
                     $('.album-publisher').html(response.label)
-                    $('.music-player-iframe.spotify').attr('src', 'https://open.spotify.com/embed?uri=spotify%3Aalbum%3A' + response.id)
                     $('.music-service-button.spotify').css('display', 'inline-block')
-
-
-
+                    $( ".music-player-container.app-container.spotify" ).append( '<iframe width="100%" src="'+'https://open.spotify.com/embed?uri=spotify%3Aalbum%3A' + response.id +'" frameborder="0" allow="autoplay; encrypted-media" height="'+($('.body').width()*.75).toString()+'"allowfullscreen></iframe>')
+                    removeActiveMusicServiceButton()
+                    $('.music-service-button.spotify').addClass('active')
+                    $('.music-service-button.spotify').click()
                     $.ajax({
                            url: "https://api.spotify.com/v1/artists/"+ response.artists[0].id,
                            type: "GET",
@@ -41,7 +41,6 @@ $( document ).ready(function() {
 
                              $('.artist-photo-url').attr('href', res.external_urls.spotify)
                              $('.artist-photo').css('background-image', 'url("'+ res.images[0].url +'")')
-
                             }
                     });
 
@@ -84,8 +83,14 @@ $( document ).ready(function() {
              type: "GET",
              beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'Bearer ' + 'eyJhbGciOiJFUzI1NiIsImtpZCI6Ikg3VlJaNDZSMzcifQ.eyJpc3MiOiIzNTI1OTZaM1NDIiwiZXhwIjoxNTMyOTc0MDA2LCJpYXQiOjE1MjIxOTcwMDZ9.m40hOAQwOKi1B0afQuZgirh8fD9sBdVgG6Q1wWNcHCUDXpfCzOi04QNNRYwfRWDlP1RrEmu96l80qjTREyxAzw');},
              success: function(res) {
-               $('.music-player-iframe.apple').attr('src', 'https://tools.applemusic.com/embed/v1/album/'+ res.results.albums.data[0].id +'?country=us')
+
                $('.music-service-button.apple').css('display', 'inline-block')
+
+              $( ".music-player-container.app-container.apple" ).append('<iframe class="music-player-iframe apple" src="'+'https://tools.applemusic.com/embed/v1/album/'+ res.results.albums.data[0].id +'?country=us'+'" width="100%" height="'+($('.body').width()*.75).toString()+'" frameborder="0"></iframe>')
+              removeActiveMusicServiceButton()
+              $('.music-service-button.apple').addClass('active')
+              $('.music-service-button.apple').click()
+
               }
       });
 
@@ -134,6 +139,35 @@ $( document ).ready(function() {
       $( window ).resize(function() {
         $('iframe').attr('height', ($('.body').width()*.75).toString())
       });
+
+      $('.carousel-inner.iframe').attr('height', ($('.body').width()*.75).toString())
+
+
+      $( window ).resize(function() {
+        $('.carousel-inner.iframe').attr('height', ($('.body').width()*.75).toString())
+      });
+      $('#carousel-example-generic1').attr('min-height', ($('.body').width()*.75).toString())
+
+
+      $( window ).resize(function() {
+        $('#carousel-example-generic1').attr('min-height', ($('.body').width()*.75).toString())
+      });
+
+      $('.music-service-button.apple').click(function(){
+        $('.music-player-container.app-container.apple iframe').attr('src', $('.music-player-container.app-container.apple iframe').attr('src'));
+        $('.music-player-container.app-container.spotify iframe').attr('src', $('.music-player-container.app-container.spotify iframe').attr('src'));
+        $('.music-player-container.app-container.youtube iframe').attr('src', $('.music-player-container.app-container.youtube iframe').attr('src'));
+      })
+      $('.music-service-button.spotify').click(function(){
+        $('.music-player-container.app-container.youtube iframe').attr('src', $('.music-player-container.app-container.youtube iframe').attr('src'));
+        $('.music-player-container.app-container.apple iframe').attr('src', $('.music-player-container.app-container.apple iframe').attr('src'));
+      })
+      $('.music-service-button.youtube').click(function(){
+        $('.music-player-container.app-container.apple iframe').attr('src', $('.music-player-container.app-container.apple iframe').attr('src'));
+        $('.music-player-container.app-container.spotify iframe').attr('src', $('.music-player-container.app-container.spotify iframe').attr('src'));
+      })
+
+
 
 
 

@@ -84,6 +84,11 @@ body {
   border-bottom: .8vw solid white;
 }
 
+#carousel-example-generic1 {
+  z-index: 4;
+  background: rgba(22,27,31,1);
+}
+
 .music-player-container {
   min-height: 100px;
   padding-top: 5px;
@@ -157,6 +162,12 @@ body {
 
 .item-inner {
   min-height: 35vw;
+  padding: 0% 12%;
+  display: flex;
+  justify-content: space-between;
+}
+.item-inner.iframe {
+  
   padding: 0% 12%;
   display: flex;
   justify-content: space-between;
