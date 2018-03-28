@@ -4,6 +4,7 @@ $( document ).ready(function() {
   $('.music-service-button.youtube').css('display', 'inline-block')
   $('.music-service-button.youtube').addClass('active')
   $('.music-player-container.youtube').css('display', 'block')
+  $('.music-player-container.youtube iframe').attr('src', "https://www.youtube.com/embed/videoseries?list=PLVtit4eDhYIKqEEA91JPfu2VYKKnmw7y9")
 
   $.ajax({
          url: "/token",
