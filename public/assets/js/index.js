@@ -1,8 +1,6 @@
 
 $( document ).ready(function() {
-
-
-
+  console.log(window.location.href)
   $.ajax({
          url: "https://www.googleapis.com/youtube/v3/search?part=snippet&q=2014+Forrest+Hills+Drive&key=AIzaSyAphZf2PFTn8QR0C02-QbduW0sbswG07y8&type=playlist&maxResults=1",
          type: "GET",
@@ -20,10 +18,12 @@ $( document ).ready(function() {
          type: "GET",
          success: function(token) {
            $.ajax({
-                  url: "https://api.spotify.com/v1/albums/7viNUmZZ8ztn2UB4XB3jIL",
+                  url: "https://api.spotify.com/v1/search?query=Forest+Hills+Drive+2014&type=album&limit=1",
                   type: "GET",
                   beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'Bearer ' + token);},
-                  success: function(response) {
+                  success: function(resp) {
+                    var response = resp.albums.items[0]
+
                     $('.album-art').css("background-image", 'url("'+response.images[0].url+'")')
                     $('.album-title').html(response.name)
                     $('.album-artist').html(response.artists[0].name)

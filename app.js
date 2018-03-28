@@ -10,9 +10,7 @@ var port = process.env.PORT || 1234;
 
 app.use(express.static('public'));
 
-app.get('/', function(req, res) {
-  res.status(200).render('index.js');
-});
+
 
 app.get('/token', function(req, res) {
 
@@ -37,6 +35,10 @@ app.get('/token', function(req, res) {
   });
 
 
+});
+
+app.get('/', function(req, res) {
+  res.status(200).render('index.js');
 });
 
 app.listen(port);
