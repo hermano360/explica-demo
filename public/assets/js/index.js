@@ -1,8 +1,9 @@
 
 $( document ).ready(function() {
-  console.log(window.location.href)
+  var searchQuery = window.location.href.split("?").length > 1 ? window.location.href.split("?").pop() : "2014+Forrest+Hills+Drive"
+  console.log(searchQuery)
   $.ajax({
-         url: "https://www.googleapis.com/youtube/v3/search?part=snippet&q=2014+Forrest+Hills+Drive&key=AIzaSyAphZf2PFTn8QR0C02-QbduW0sbswG07y8&type=playlist&maxResults=1",
+         url: "https://www.googleapis.com/youtube/v3/search?part=snippet&q="+searchQuery+"&key=AIzaSyAphZf2PFTn8QR0C02-QbduW0sbswG07y8&type=playlist&maxResults=1",
          type: "GET",
          success: function(response) {
             $('.music-service-button.youtube').css('display', 'inline-block')
@@ -18,16 +19,16 @@ $( document ).ready(function() {
          type: "GET",
          success: function(token) {
            $.ajax({
-                  url: "https://api.spotify.com/v1/search?query=Forest+Hills+Drive+2014&type=album&limit=1",
+                  url: "https://api.spotify.com/v1/search?query="+searchQuery+"&type=album&limit=1",
                   type: "GET",
                   beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'Bearer ' + token);},
                   success: function(resp) {
                     var response = resp.albums.items[0]
-
+                    console.log(resp)
                     $('.album-art').css("background-image", 'url("'+response.images[0].url+'")')
                     $('.album-title').html(response.name)
+                    $('.artist-photo-name').html(response.artists[0].name)
                     $('.album-artist').html(response.artists[0].name)
-                    $('.album-publisher').html(response.label)
                     $('.music-service-button.spotify').css('display', 'inline-block')
                     $( ".music-player-container.app-container.spotify" ).append( '<iframe width="100%" src="'+'https://open.spotify.com/embed?uri=spotify%3Aalbum%3A' + response.id +'" frameborder="0" allow="autoplay; encrypted-media" height="'+($('.body').width()*.75).toString()+'"allowfullscreen></iframe>')
                     removeActiveMusicServiceButton()
@@ -79,11 +80,11 @@ $( document ).ready(function() {
 
 
       $.ajax({
-             url: "https://api.music.apple.com/v1/catalog/us/search?term=2014+Forest+Hills+Drive&limit=1&types=albums",
+             url: "https://api.music.apple.com/v1/catalog/us/search?term="+searchQuery+"&limit=1&types=albums",
              type: "GET",
              beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'Bearer ' + 'eyJhbGciOiJFUzI1NiIsImtpZCI6Ikg3VlJaNDZSMzcifQ.eyJpc3MiOiIzNTI1OTZaM1NDIiwiZXhwIjoxNTMyOTc0MDA2LCJpYXQiOjE1MjIxOTcwMDZ9.m40hOAQwOKi1B0afQuZgirh8fD9sBdVgG6Q1wWNcHCUDXpfCzOi04QNNRYwfRWDlP1RrEmu96l80qjTREyxAzw');},
              success: function(res) {
-
+               $('.album-publisher').html(res.results.albums.data[0].attributes.recordLabel)
                $('.music-service-button.apple').css('display', 'inline-block')
 
               $( ".music-player-container.app-container.apple" ).append('<iframe class="music-player-iframe apple" src="'+'https://tools.applemusic.com/embed/v1/album/'+ res.results.albums.data[0].id +'?country=us'+'" width="100%" height="'+($('.body').width()*.75).toString()+'" frameborder="0"></iframe>')

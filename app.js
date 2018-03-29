@@ -1,19 +1,21 @@
 
 var express = require('express');
+var path = require('path')
+const bodyParser = require('body-parser');
 var request = require('request')
 var http = require("http")
 
 
-
 var app = express();
-var port = process.env.PORT || 1234;
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-app.use(express.static('public'));
+var port = process.env.PORT || 1234;
 
 
 
 app.get('/token', function(req, res) {
-
   var client_id = 'e9f8db119f1a4493bf9376e73176c9fb'; // Your client id
   var client_secret = '169ed9a5bf9642348e0bd00e816ab635'; // Your secret
 
@@ -33,13 +35,12 @@ app.get('/token', function(req, res) {
       res.send(body.access_token);
     }
   });
-
-
 });
 
-app.get('/', function(req, res) {
-  res.status(200).render('index.js');
+app.get('/*', function(req, res,next) {
+  res.status(200).sendFile(path.join(__dirname, 'public', 'index.html'));
 });
+
 
 app.listen(port);
 console.log("Listening to port", port);
