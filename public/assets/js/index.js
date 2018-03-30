@@ -1,6 +1,6 @@
 
 $( document ).ready(function() {
-  var searchQuery = window.location.href.split("?").length > 1 ? window.location.href.split("?").pop() : "2014+Forrest+Hills+Drive"
+  var searchQuery = window.location.href.split("?").length > 1 ? window.location.href.split("?").pop() : "2014+Forest+Hills+Drive"
   console.log(searchQuery)
   $.ajax({
          url: "https://www.googleapis.com/youtube/v3/search?part=snippet&q="+searchQuery+"&key=AIzaSyAphZf2PFTn8QR0C02-QbduW0sbswG07y8&type=playlist&maxResults=1",
